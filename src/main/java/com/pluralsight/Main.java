@@ -1,7 +1,5 @@
 package com.pluralsight;
-
 import com.pluralsight.ui.Console;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,11 +11,12 @@ public class Main {
         String command;
         do{
             command = Console.promptForString("""
-                    ------Home Screen------
-                    D) Add Deposit
-                    P) Make Payment (Debit)
-                    L) Ledger
-                    X) Exit""");
+                    <-<-<-<-Home Screen->->->->
+                    -> D) Add Deposit
+                    -> P) Make Payment (Debit)
+                    -> L) Ledger
+                    -> X) Exit
+                    >->->->->->->""");
         switch (command.toUpperCase()){
             case "D":
                 addTransaction(1);
@@ -26,7 +25,7 @@ public class Main {
                addTransaction(-1);
                 break;
             case "L":
-               // ledgerMenu();
+               ledgerMenu();
                 break;
             case "X":
                 break;
@@ -36,6 +35,7 @@ public class Main {
         }while (!command.equalsIgnoreCase("X"));
         System.out.println("Session terminated. Vault locked. See you next time!");
     }
+
 
     /**
      * Prompt the user for description,Vendor and Amount gets the current time and date
@@ -74,5 +74,42 @@ public class Main {
         System.out.println("---------------------------------------------");
         System.out.println("Entry synchronized. Ledger integrity maintained.");
         System.out.println("---------------------------------------------");
+    }
+
+    /**
+     * Displays a menu and lets user choose between different ledger display options.
+     * user can go back to home screen by pressing "H"
+     */
+    private static void ledgerMenu() {
+        String command;
+        do{
+            command = Console.promptForString("""
+                    <-<-<-<-Ledger->->->->
+                    -> A) All
+                    -> D) Deposit
+                    -> P) Payments
+                    -> R) Reports
+                    -> H) Home
+                    ->->->->->->->""");
+            switch (command.toUpperCase()){
+                case "A":
+                    //displayAll()
+                    break;
+                case "D":
+                    //displayDeposit()
+                    break;
+                case "P":
+                    //displayPayments()
+                    break;
+                case "R":
+                    //reportsMenu()
+                    break;
+                case "H":
+                    break;
+                default:
+                    System.out.println("Invalid Input! Try Again.");
+
+            }
+        }while (!command.equalsIgnoreCase("H"));
     }
 }
