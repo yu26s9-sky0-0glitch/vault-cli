@@ -20,10 +20,10 @@ public class Main {
                     X) Exit""");
         switch (command.toUpperCase()){
             case "D":
-               addDeposit();
+                addTransaction(1);
                 break;
             case "P":
-              //  makePayment();
+               addTransaction(-1);
                 break;
             case "L":
                // ledgerMenu();
@@ -40,19 +40,18 @@ public class Main {
     /**
      * Prompt the user for description,Vendor and Amount gets the current time and date
      * formats the time to hh:mm:ss
+     * @param sign takes 1 or -1 as parameter and multiplies the amount to it.
      * calls writeToLedger with all variables defined
      */
-    private static void addDeposit() {
+    private static void addTransaction(int sign) {
         String description = Console.promptForString("Briefly describe the transaction:");
         String payer = Console.promptForString("Enter the business or person involved: ");
-        double amount = Console.promptForDouble("Enter the total amount deposited: ");
+        double amount = Console.promptForDouble("Enter the total amount Transacted: ");
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
         String formattedTime = time.format(fmt);
-        writeToLedger(date,formattedTime,description,payer,Math.abs(amount));
-
-
+        writeToLedger(date,formattedTime,description,payer,Math.abs(amount)*sign);
     }
 
     /**
