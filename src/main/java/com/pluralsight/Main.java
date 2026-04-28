@@ -109,7 +109,7 @@ public class Main {
                     displayPayments();
                     break;
                 case "R":
-                    //reportsMenu()
+                    reportsMenu();
                     break;
                 case "H":
                     break;
@@ -176,5 +176,44 @@ public class Main {
             }
         }
 
+    }
+
+    /**
+     * displays the reports Menu which gives user different option for filtering
+     */
+    private static void reportsMenu() {
+        int command;
+        do{
+            command = Console.promptForInt("""
+                    <-<-<-<-Reports->->->->
+                    -> 1) Month To Date
+                    -> 2) Previous Month
+                    -> 3) Year To Date
+                    -> 4) Previous Year
+                    -> 5) Search by Vendor
+                    -> 0) Back
+                   ->->->->->->""");
+            switch (command){
+                case 1:
+                    //MonthToDate();
+                    break;
+                case 2:
+                    //perviousMonth();
+                    break;
+                case 3:
+                    //yearToDate()
+                    break;
+                case 4:
+                    //perviousYear()
+                    break;
+                case 5:
+                    //searchByVendor();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid Input! Try Again.");
+            }
+        }while (command!=0);
     }
 }
