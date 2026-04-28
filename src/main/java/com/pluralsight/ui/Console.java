@@ -21,16 +21,26 @@ public class Console {
 
     }
 
+
     /**
      * Prompts the user for a string.
      * @param prompt to display the user
      * @return the string the user selected.
      */
     public static String promptForString(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine().trim();
-    }
+        String result;
 
+        while (true) {
+            System.out.print(prompt);
+            result = scanner.nextLine().trim();
+
+            if (!result.isEmpty()) {
+                return result;
+            }
+
+            System.out.println("Error: Input cannot be empty. Please try again.");
+        }
+    }
     /**
      * Prompts the user for an integer.
      * @param prompt to display the user
@@ -112,4 +122,10 @@ public class Console {
         //opportunity to enhance this with some error protection.
     }
 
+    /**
+     * cleans up the leftover Enters
+     */
+    public static void eatLine() {
+        scanner.nextLine();
+    }
 }

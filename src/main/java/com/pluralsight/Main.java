@@ -1,10 +1,7 @@
 package com.pluralsight;
 import com.pluralsight.ui.Console;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -38,6 +35,7 @@ public class Main {
                 break;
             default:
                 System.out.println("Invalid Input Try again!");
+                break;
         }
         }while (!command.equalsIgnoreCase("X"));
         System.out.println("Session terminated. Vault locked. See you next time!");
@@ -51,15 +49,23 @@ public class Main {
      * calls writeToLedger with all variables defined
      */
     private static void addTransaction(int sign) {
-        String description = Console.promptForString("Briefly describe the transaction:");
+        boolean notRun = true;
+        while(notRun){
+        try{
+        String description = Console.promptForString("Briefly describe the transaction: ");
         String payer = Console.promptForString("Enter the business or person involved: ");
-        double amount = Console.promptForDouble("Enter the total amount Transacted: ");
+        double amount = Console.promptForDouble("Enter the total amount Transacted(No $ sign): ");
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
         String formattedTime = time.format(fmt);
         writeToLedger(date,formattedTime,description,payer,Math.abs(amount)*sign);
-    }
+        notRun = false;
+        }catch (Exception e){
+            System.out.println("Invalid Entry!");
+            Console.eatLine();
+            notRun = true;
+        }}}
 
     /**
      * Opens the transaction.csv write into it the data passed as parameter in appropriate format.
@@ -72,8 +78,9 @@ public class Main {
     private static void writeToLedger(LocalDate date, String formattedTime, String description, String payer, double amount) {
         try {
             FileWriter fr = new FileWriter("data/transaction.csv", true);
+            BufferedWriter bfwriter = new BufferedWriter(fr);
             String line = String.format("%s|%s|%s|%s|%.2f\n",date,formattedTime,description,payer,amount);
-            fr.write(line);
+            bfwriter.write(line);
             fr.close();
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -131,17 +138,17 @@ public class Main {
         ArrayList<Transaction> ledgerLoader = new ArrayList<>();
         try{
         FileReader fr = new FileReader("data/transaction.csv");
-            BufferedReader bfReader = new BufferedReader(fr);
-            bfReader.readLine();
-            String input;
-            while((input = bfReader.readLine())!=null){
-                String[] parts = input.split("\\|");
-                ledgerLoader.add(0,new Transaction(LocalDate.parse(parts[0]),LocalTime.parse(parts[1]),parts[2],parts[3],Double.parseDouble(parts[4])));
-            }
-            bfReader.close();
-            System.out.println(ledgerLoader.getFirst().getAmount());
-         }catch (IOException e){
-            System.out.println(e.getMessage());
+        BufferedReader bfReader = new BufferedReader(fr);
+        bfReader.readLine();
+        String input;
+        while((input = bfReader.readLine())!=null){
+            String[] parts = input.split("\\|");
+            ledgerLoader.add(0,new Transaction(LocalDate.parse(parts[0]),LocalTime.parse(parts[1]),parts[2],parts[3],Double.parseDouble(parts[4])));
+        }
+        bfReader.close();
+        System.out.println(ledgerLoader.getFirst().getAmount());
+        }catch (IOException e){
+        System.out.println(e.getMessage());
         }
         return ledgerLoader;
     }
@@ -195,7 +202,7 @@ public class Main {
                    ->->->->->->""");
             switch (command){
                 case 1:
-                    //MonthToDate();
+                    MonthToDate();
                     break;
                 case 2:
                     //perviousMonth();
@@ -215,5 +222,18 @@ public class Main {
                     System.out.println("Invalid Input! Try Again.");
             }
         }while (command!=0);
+    }
+
+    /**
+     *displays all month to date transactions
+     */
+    private static void MonthToDate() {
+        int monthValue = LocalDate.now().getMonthValue();
+        int yearValue = LocalDate.now().getYear();
+        for(Transaction t:ledger){
+            if (t.getDate().getMonthValue()==monthValue && t.getDate().getYear()==yearValue){
+                System.out.println(t.toString());
+            }
+        }
     }
 }
