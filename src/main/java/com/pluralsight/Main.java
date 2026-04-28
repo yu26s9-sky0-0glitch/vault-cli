@@ -100,8 +100,7 @@ public class Main {
                     ->->->->->->->""");
             switch (command.toUpperCase()){
                 case "A":
-                    //displayAll()
-                    getLedger();
+                    displayAll();
                     break;
                 case "D":
                     //displayDeposit()
@@ -120,6 +119,8 @@ public class Main {
             }
         }while (!command.equalsIgnoreCase("H"));
     }
+
+
 
     /**
      * Read all transactions and add it to Arraylist of transaction class
@@ -144,6 +145,10 @@ public class Main {
         }
         return ledgerLoader;
     }
-
+    private static void displayAll() {
+        for(Transaction t:ledger){
+            System.out.println(t.toString());
+        }
     }
+
 }
