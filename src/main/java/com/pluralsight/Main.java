@@ -211,7 +211,7 @@ public class Main {
                     yearToDate();
                     break;
                 case 4:
-                    //perviousYear();
+                    perviousYear();
                     break;
                 case 5:
                     //searchByVendor();
@@ -255,6 +255,17 @@ public class Main {
         int yearValue = LocalDate.now().getYear();
         for(Transaction t:ledger){
             if (t.getDate().getYear()==yearValue){
+                System.out.println(t.toString());
+            }
+        }
+    }
+    /**
+     * displays all transaction in past year
+     */
+    private static void perviousYear() {
+        int yearValue = LocalDate.now().getYear();
+        for(Transaction t:ledger){
+            if (t.getDate().getYear()==yearValue-1){
                 System.out.println(t.toString());
             }
         }
