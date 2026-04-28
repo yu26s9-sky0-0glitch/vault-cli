@@ -1,12 +1,19 @@
 package com.pluralsight;
 import com.pluralsight.ui.Console;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Main {
+    static ArrayList<Transaction> ledger = getLedger();
+
+
     static void main(){
         String command;
         do{
@@ -94,6 +101,7 @@ public class Main {
             switch (command.toUpperCase()){
                 case "A":
                     //displayAll()
+                    getLedger();
                     break;
                 case "D":
                     //displayDeposit()
@@ -111,5 +119,31 @@ public class Main {
 
             }
         }while (!command.equalsIgnoreCase("H"));
+    }
+
+    /**
+     * Read all transactions and add it to Arraylist of transaction class
+     * adds each new item to index zero pushing older dates down and reversing the order
+     * @return the Array list
+     */
+    private static ArrayList<Transaction> getLedger() {
+        ArrayList<Transaction> ledgerLoader = new ArrayList<>();
+        try{
+        FileReader fr = new FileReader("data/transaction.csv");
+            BufferedReader bfReader = new BufferedReader(fr);
+            bfReader.readLine();
+            String input;
+            while((input = bfReader.readLine())!=null){
+                String[] parts = input.split("\\|");
+                ledgerLoader.add(0,new Transaction(LocalDate.parse(parts[0]),LocalTime.parse(parts[1]),parts[2],parts[3],Double.parseDouble(parts[4])));
+            }
+            bfReader.close();
+            System.out.println(ledgerLoader.getFirst().getAmount());
+         }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+        return ledgerLoader;
+    }
+
     }
 }
