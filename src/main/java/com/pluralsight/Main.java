@@ -202,16 +202,16 @@ public class Main {
                    ->->->->->->""");
             switch (command){
                 case 1:
-                    MonthToDate();
+                    monthToDate();
                     break;
                 case 2:
                     perviousMonth();
                     break;
                 case 3:
-                    //yearToDate()
+                    yearToDate();
                     break;
                 case 4:
-                    //perviousYear()
+                    //perviousYear();
                     break;
                 case 5:
                     //searchByVendor();
@@ -227,7 +227,7 @@ public class Main {
     /**
      *displays all month to date transactions
      */
-    private static void MonthToDate() {
+    private static void monthToDate() {
         int monthValue = LocalDate.now().getMonthValue();
         int yearValue = LocalDate.now().getYear();
         for(Transaction t:ledger){
@@ -248,5 +248,15 @@ public class Main {
             }
         }
     }
-
+    /**
+     *displays all year to date transactions
+     */
+    private static void yearToDate() {
+        int yearValue = LocalDate.now().getYear();
+        for(Transaction t:ledger){
+            if (t.getDate().getYear()==yearValue){
+                System.out.println(t.toString());
+            }
+        }
+    }
 }
