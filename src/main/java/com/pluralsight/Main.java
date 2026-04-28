@@ -103,10 +103,10 @@ public class Main {
                     displayAll();
                     break;
                 case "D":
-                    //displayDeposit()
+                    displayDeposit();
                     break;
                 case "P":
-                    //displayPayments()
+                    displayPayments();
                     break;
                 case "R":
                     //reportsMenu()
@@ -145,10 +145,36 @@ public class Main {
         }
         return ledgerLoader;
     }
+
+    /**
+     * displays all transactions
+     */
     private static void displayAll() {
         for(Transaction t:ledger){
             System.out.println(t.toString());
         }
     }
 
+    /**
+     * displays all the transaction with positive amount aka deposits
+     */
+    private static void displayDeposit() {
+        for(Transaction t:ledger){
+            if (t.getAmount()>0){
+                System.out.println(t.toString());
+            }
+        }
+    }
+
+    /**
+     * displays all the transaction with negative amount aka Payments
+     */
+    private static void displayPayments() {
+        for(Transaction t:ledger){
+            if (t.getAmount()<0){
+                System.out.println(t.toString());
+            }
+        }
+
+    }
 }
