@@ -23,10 +23,12 @@ public class Main {
                     >->->->->->->""");
         switch (command.toUpperCase()){
             case "D":
-                addTransaction(1);
+               addTransaction(1);
+               // addTransaction("Deposit");
                 break;
             case "P":
-               addTransaction(-1);
+              addTransaction(-1);
+               //addTransaction("Payment");
                 break;
             case "L":
                ledgerMenu();
@@ -41,6 +43,22 @@ public class Main {
         System.out.println("Session terminated. Vault locked. See you next time!");
     }
 
+    /**
+     *
+     * @param operation should be "Deposit" or "Payment"
+     */
+    //todo:
+//    private static void addTransaction(String operation){
+//        if(operation.equalsIgnoreCase("Deposit")){
+//            //do deposit
+//        }
+//        else if (operation.equalsIgnoreCase("Payment")){
+//            //do payment
+//        }
+//        else{
+//            //this should not happen... how to handle error?
+//        }
+//    }
 
     /**
      * Prompt the user for description,Vendor and Amount gets the current time and date
@@ -63,7 +81,6 @@ public class Main {
         notRun = false;
         }catch (Exception e){
             System.out.println("Invalid Entry!");
-            Console.eatLine();
             notRun = true;
         }}}
 
@@ -76,11 +93,16 @@ public class Main {
      * @param amount amount paid
      */
     private static void writeToLedger(LocalDate date, String formattedTime, String description, String payer, double amount) {
+        //todo find a better place to put it in
+       // Transaction t = new Transaction(date, LocalTime.parse(formattedTime), description, payer, amount);
+        //ledger.add(t);
+
         try {
             FileWriter fr = new FileWriter("data/transaction.csv", true);
             BufferedWriter bfwriter = new BufferedWriter(fr);
             String line = String.format("%s|%s|%s|%s|%.2f\n",date,formattedTime,description,payer,amount);
             bfwriter.write(line);
+            bfwriter.close();
             fr.close();
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -199,7 +221,7 @@ public class Main {
                     -> 4) Previous Year
                     -> 5) Search by Vendor
                     -> 0) Back
-                   ->->->->->->""");
+                   ->->->->->->""",0,5);
             switch (command){
                 case 1:
                     monthToDate();
@@ -214,7 +236,7 @@ public class Main {
                     perviousYear();
                     break;
                 case 5:
-                    //searchByVendor();
+                    searchByVendor();
                     break;
                 case 0:
                     break;
@@ -223,6 +245,7 @@ public class Main {
             }
         }while (command!=0);
     }
+
 
     /**
      *displays all month to date transactions
@@ -268,6 +291,17 @@ public class Main {
             if (t.getDate().getYear()==yearValue-1){
                 System.out.println(t.toString());
             }
+        }
+    }
+    /**
+     * displays all transaction in specified
+     */
+    private static void searchByVendor() {
+        String vendor = Console.promptForString("Enter the vendor: ");
+        for(Transaction t : ledger){
+        if (vendor.equalsIgnoreCase(t.getVendor())){
+            System.out.println(t.toString());
+        }
         }
     }
 }
