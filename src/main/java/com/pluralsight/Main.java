@@ -6,14 +6,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Main {
     static ArrayList<Transaction> ledger = getLedger();
 
 
-    static void main(){
+    static void main() {
         String command;
-        do{
+        do {
             command = Console.promptForString("""
                     <-<-<-<-Home Screen->->->->
                     -> D) Add Deposit
@@ -21,68 +22,58 @@ public class Main {
                     -> L) Ledger
                     -> X) Exit
                     >->->->->->->""");
-        switch (command.toUpperCase()){
-            case "D":
-               addTransaction(1);
-               // addTransaction("Deposit");
-                break;
-            case "P":
-              addTransaction(-1);
-               //addTransaction("Payment");
-                break;
-            case "L":
-               ledgerMenu();
-                break;
-            case "X":
-                break;
-            default:
-                System.out.println("Invalid Input Try again!");
-                break;
-        }
-        }while (!command.equalsIgnoreCase("X"));
+            switch (command.toUpperCase()) {
+                case "D":
+                     addTransaction("Deposit");
+                    break;
+                case "P":
+                    addTransaction("Payment");
+                    break;
+                case "L":
+                    ledgerMenu();
+                    break;
+                case "X":
+                    break;
+                default:
+                    System.out.println("Invalid Input Try again!");
+                    break;
+            }
+        } while (!command.equalsIgnoreCase("X"));
         System.out.println("Session terminated. Vault locked. See you next time!");
     }
 
-    /**
-     *
-     * @param operation should be "Deposit" or "Payment"
-     */
-    //todo:
-//    private static void addTransaction(String operation){
-//        if(operation.equalsIgnoreCase("Deposit")){
-//            //do deposit
-//        }
-//        else if (operation.equalsIgnoreCase("Payment")){
-//            //do payment
-//        }
-//        else{
-//            //this should not happen... how to handle error?
-//        }
-//    }
 
     /**
      * Prompt the user for description,Vendor and Amount gets the current time and date
      * formats the time to hh:mm:ss
-     * @param sign takes 1 or -1 as parameter and multiplies the amount to it.
+     * @param operation should be "Deposit" or "Payment"
      * calls writeToLedger with all variables defined
      */
-    private static void addTransaction(int sign) {
-        boolean notRun = true;
-        while(notRun){
-        try{
-        String description = Console.promptForString("Briefly describe the transaction: ");
-        String payer = Console.promptForString("Enter the business or person involved: ");
-        double amount = Console.promptForDouble("Enter the total amount Transacted(No $ sign): ");
-        LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
-        String formattedTime = time.format(fmt);
-        writeToLedger(date,formattedTime,description,payer,Math.abs(amount)*sign);
-        notRun = false;
-        }catch (Exception e){
-            System.out.println("Invalid Entry!");
-            notRun = true;
-        }}}
+    //todo:
+    private static void addTransaction(String operation) {
+        if (operation.equalsIgnoreCase("Deposit")) {
+            String description = Console.promptForString("Briefly describe the deposit purpose: ");
+            String payer = Console.promptForString("Enter the business or person involved: ");
+            double amount = Console.promptForDouble("Enter the total amount deposited(No $ sign): ");
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
+            String formattedTime = time.format(fmt);
+            writeToLedger(date, LocalTime.parse(formattedTime), description, payer, Math.abs(amount));
+        }
+
+        else if(operation.equalsIgnoreCase("Payment")){
+                    String description = Console.promptForString("Briefly describe the payment purpose: ");
+                    String payer = Console.promptForString("Enter the business or person involved: ");
+                    double amount = Console.promptForDouble("Enter the total amount paid(No $ sign): ");
+                    LocalDate date = LocalDate.now();
+                    LocalTime time = LocalTime.now();
+                    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
+                    String formattedTime = time.format(fmt);
+                    writeToLedger(date, LocalTime.parse(formattedTime), description, payer, Math.abs(amount)*-1);
+
+        }
+    }
 
     /**
      * Opens the transaction.csv write into it the data passed as parameter in appropriate format.
@@ -92,10 +83,7 @@ public class Main {
      * @param payer name of the person/vendor/business that made the deposit
      * @param amount amount paid
      */
-    private static void writeToLedger(LocalDate date, String formattedTime, String description, String payer, double amount) {
-        //todo find a better place to put it in
-       // Transaction t = new Transaction(date, LocalTime.parse(formattedTime), description, payer, amount);
-        //ledger.add(t);
+    private static void writeToLedger(LocalDate date, LocalTime formattedTime, String description, String payer, double amount) {
 
         try {
             FileWriter fr = new FileWriter("data/transaction.csv", true);
@@ -107,6 +95,8 @@ public class Main {
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
+        Transaction t = new Transaction(date, formattedTime, description, payer, amount);
+        ledger.add(t);
         System.out.println("---------------------------------------------");
         System.out.println("Entry synchronized. Ledger integrity maintained.");
         System.out.println("---------------------------------------------");
@@ -165,13 +155,31 @@ public class Main {
         String input;
         while((input = bfReader.readLine())!=null){
             String[] parts = input.split("\\|");
-            ledgerLoader.add(0,new Transaction(LocalDate.parse(parts[0]),LocalTime.parse(parts[1]),parts[2],parts[3],Double.parseDouble(parts[4])));
+            LocalDate date = LocalDate.parse(parts[0]);
+            LocalTime time = LocalTime.parse(parts[1]);
+            double amount  = Double.parseDouble(parts[4]);
+            ledgerLoader.add(0,new Transaction(date,time,parts[2],parts[3],amount));
         }
         bfReader.close();
-        System.out.println(ledgerLoader.getFirst().getAmount());
         }catch (IOException e){
         System.out.println(e.getMessage());
         }
+        return sortLedger(ledgerLoader);
+    }
+
+    /**
+     * gets callled by leaderLoader with freshly loaded arraylist.
+     * uses Arraylist.sort() to sort it based on date then time in a reversed order
+     * @param ledgerLoader the ledger arraylist loaded with Transaction objects
+     * @return sorted and reversed ledger
+     */
+    private static ArrayList<Transaction> sortLedger(ArrayList<Transaction> ledgerLoader) {
+
+        ledgerLoader.sort(
+                Comparator.comparing(Transaction::getDate)
+                        .thenComparing(Transaction::getTime)
+                        .reversed()
+        );
         return ledgerLoader;
     }
 
