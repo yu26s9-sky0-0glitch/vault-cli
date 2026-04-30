@@ -60,7 +60,7 @@ public class Main {
             double amount = Console.promptForDouble("Enter the total amount paid(No $ sign): ");
             LocalDate date = LocalDate.now();
             LocalTime time = LocalTime.now();
-            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm:ss");
             LocalTime formattedTime = LocalTime.parse(time.format(fmt));
             writeToLedgerCsv(date,formattedTime,description, payer,Math.abs(amount) * -1);
 

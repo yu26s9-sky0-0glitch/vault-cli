@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private LocalDate date;
@@ -40,7 +41,9 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("Date-> %-15s | Time-> %-15s | Description-> %-22s | Vendor-> %-22s | Amount-> %-15.2f",date ,time
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        String formattedTime = time.format(timeFormatter);
+        return String.format("Date-> %-15s | Time-> %-15s | Description-> %-22s | Vendor-> %-22s | Amount-> %-15.2f",date ,formattedTime
                 ,description
                 , vendor, amount);
 

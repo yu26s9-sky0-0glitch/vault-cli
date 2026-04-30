@@ -1,5 +1,5 @@
 date|time|description|vendor|amount
-2025-08-14|08:52:40|Pizza|Uno|-15.99
+2025-08-14|20:52:40|Pizza|Uno|-15.99
 2025-09-01|12:15:20|Monthly Rent|Leasing Office|-1250.00
 2025-10-15|18:22:10|Dinner|Chipotle|-18.45
 2025-11-28|10:50:20|Black Friday Sale|BestBuy|-89.99
@@ -13,22 +13,25 @@ date|time|description|vendor|amount
 2026-03-26|05:34:33|Ipad|BestBuy|-599.99
 2026-04-10|14:05:22|New Sneakers|Nike Store|-110.00
 2026-04-20|16:40:11|Movie Tickets|AMC|-32.00
-2026-04-27|04:06:21|Pay Check|Amazon|516.67
-2026-04-27|04:09:32|Borrowed Money|Sana|400.00
-2026-04-27|04:29:14|Wisely|YearUp|100.00
-2026-04-27|05:01:46|Morning Coffee|Dunkin'|-4.59
-2026-04-27|05:06:47|gift|mom|50.00
-2026-04-27|05:09:20|Monster Energy Drink|Vending machine|-3.45
+2026-04-27|16:06:21|Pay Check|Amazon|516.67
+2026-04-27|16:09:32|Borrowed Money|Sana|400.00
+2026-04-27|16:29:14|Wisely|YearUp|100.00
+2026-04-27|17:01:46|Morning Coffee|Dunkin'|-4.59
+2026-04-27|17:06:47|gift|mom|50.00
+2026-04-27|17:09:20|Monster Energy Drink|Vending machine|-3.45
 2026-04-28|08:44:49|morning coffee|starbucks|-5.00
 2026-04-28|10:05:50|suit|jcPennys|-120.00
 2026-04-28|10:13:25|gift|Family|10000.00
 2026-04-28|10:41:29|paycheck|amazon|780.00
 2026-04-28|12:34:04|paycheck|dunkin'|500.00
-2026-04-29|02:13:36|gift|sister|250.00
-2026-04-29|03:32:19|VRE|WMATA|-5.00
-2026-04-29|03:45:59|cat food|amazon|-30.00
-2026-04-29|04:06:26|Ice Cream|Truck|-5.00
-2026-04-29|10:07:05|Tax Refund|IRS|560.00
-2026-04-29|10:10:10|vet visit|benfield hospital|-45.00
+2026-04-29|14:13:36|gift|sister|250.00
+2026-04-29|15:32:19|VRE|WMATA|-5.00
+2026-04-29|15:45:59|cat food|amazon|-30.00
+2026-04-29|16:06:26|Ice Cream|Truck|-5.00
+2026-04-29|22:07:05|Tax Refund|IRS|560.00
+2026-04-29|22:10:10|vet visit|benfield hospital|-45.00
 2026-04-30|10:43:39|lottery|VALottery|200.00
-2026-04-30|02:48:41|Matcha latte|Dunkin'|-4.29
+2026-04-30|14:48:41|Matcha latte|Dunkin'|-4.29
+2026-04-30|16:42:59|gift|sahar|1000.00
+2026-04-30|17:00:45|coffee|Dunkin'|-20.00
+2026-04-30|17:13:37|phone case|ross|-12.00

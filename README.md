@@ -36,19 +36,20 @@
 ### **Input Validation & Stability**
 * **Prompt Management:** Reads all input as a `String` first to clear the Scanner buffer and prevent "skipped" prompts (Scanner Ghosting).
 * **Exception Handling:** Employs `try-catch` blocks during data conversion. If an invalid format is entered (e.g., text instead of a date), the program re-prompts the user instead of terminating.
+* **User-Centric Formatting:** Converts internal 24-hour time data into a 12-hour AM/PM format for display, improving ledger readability without compromising data storage integrity.
 
 ---
 
 ## Application Preview
 
 ### Navigation & Menu
-| Home Screen | Ledger Menu |                     Reports Menu                     |
-| :---: | :---: |:----------------------------------------------------:|
+|                     Home Screen                     |                     Ledger Menu                     |                     Reports Menu                     |
+|:---------------------------------------------------:|:---------------------------------------------------:|:----------------------------------------------------:|
 | <img src="screenshots/home_screen.png" width="250"> | <img src="screenshots/ledger_menu.png" width="250"> | <img src="screenshots/reports_menu.png" width="250"> |
 
 ### Entry & Search
-|                      Add Transaction                      | Custom Search | Ledger Display |
-|:---------------------------------------------------------:| :---: | :---: |
+|                      Add Transaction                      |                     Custom Search                     |                     Ledger Display                     |
+|:---------------------------------------------------------:|:-----------------------------------------------------:|:------------------------------------------------------:|
 | <img src="screenshots/input_transaction.png" width="250"> | <img src="screenshots/custom_search.png" width="250"> | <img src="screenshots/display_ledger.png" width="250"> |
 
 ---
