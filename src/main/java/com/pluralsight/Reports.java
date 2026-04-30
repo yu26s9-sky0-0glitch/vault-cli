@@ -115,8 +115,8 @@ public class Reports {
      */
     private static void customSearch() {
         boolean found = false;
-        LocalDate startDate = promptForOptionalDate("Start Date (yyyy-mm-dd) or Enter to skip: ");
-        LocalDate endDate = promptForOptionalDate("End Date (yyyy-mm-dd) or Enter to skip: ");
+        LocalDate startDate = Console.promptForOptionalDate("Start Date (yyyy-mm-dd) or Enter to skip: ");
+        LocalDate endDate = Console.promptForOptionalDate("End Date (yyyy-mm-dd) or Enter to skip: ");
         String description = Console.promptForStringEmpty("Description or Enter to skip: ");
         String vendor = Console.promptForStringEmpty("Vendor or Enter to skip: ");
         String amountInput = Console.promptForStringEmpty("Amount or Enter to skip: ");
@@ -131,29 +131,11 @@ public class Reports {
             }
     }
 
-    /**
-     * Makes sure the date is formatted correctly or is empty
-     * @param prompt asks the user to enter the date or skip the question
-     * @return parsed date
-     */
-    public static LocalDate promptForOptionalDate(String prompt) {
-        while (true) {
-            String input = Console.promptForStringEmpty(prompt);
-            if (input.isEmpty()) {
-                return null;
-            }
-            try {
-                return LocalDate.parse(input);
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid format! Please use YYYY-MM-DD or press Enter to skip.");
-            }
-        }
-    }
 
     /**
      * Evaluates a transaction against multiple optional search criteria
      * Filters are ignored if the corresponding parameter is null or empty
-     * * @param t           The transaction to match
+     *  @param t           The transaction to match
      * @param startDate   Minimum date Skipped if null
      * @param endDate     Maximum date Skipped if null
      * @param description Text search for description Skipped if empty
@@ -161,7 +143,9 @@ public class Reports {
      * @param amountInput Exact amount search Skipped if null
      * @return            True if the transaction matches all active filters
      */
-    private static boolean filterPassed(Transaction t, LocalDate startDate, LocalDate endDate, String description, String vendor, String amountInput) {
+    private static boolean filterPassed(Transaction t, LocalDate startDate,
+                                        LocalDate endDate, String description,
+                                        String vendor, String amountInput) {
         if(startDate != null  && t.getDate().isBefore(startDate) )return false;
         if(endDate!=null && t.getDate().isAfter(endDate))return false;
         if(!description.isEmpty() && !t.getDescription().equalsIgnoreCase(description))return false;

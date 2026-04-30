@@ -1,15 +1,11 @@
 package com.pluralsight.ui;
-
-import java.util.InputMismatchException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Console {
 
     private static final Scanner scanner = new Scanner(System.in);
-
-
-
-
     /**
      * Prompts the user for a double.
      * @param prompt to display the user
@@ -115,5 +111,22 @@ public class Console {
         return userInput.equalsIgnoreCase("YES");
         //opportunity to enhance this with some error protection.
     }
-
+    /**
+     * Makes sure the date is formatted correctly or is empty
+     * @param prompt asks the user to enter the date or skip the question
+     * @return parsed date
+     */
+    public static LocalDate promptForOptionalDate(String prompt) {
+        while (true) {
+            String input = Console.promptForStringEmpty(prompt);
+            if (input.isEmpty()) {
+                return null;
+            }
+            try {
+                return LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid format! Please use YYYY-MM-DD or press Enter to skip.");
+            }
+        }
+    }
 }
