@@ -106,10 +106,4 @@ public class Console {
         //opportunity to enhance this with some error protection.
     }
 
-    /**
-     * cleans up the leftover Enters
-     */
-    public static void eatLine() {
-        scanner.nextLine();
-    }
 }
