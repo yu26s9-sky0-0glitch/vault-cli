@@ -2,14 +2,14 @@ date|time|description|vendor|amount
 2025-08-14|08:52:40|Pizza|Uno|-15.99
 2025-09-01|12:15:20|Monthly Rent|Leasing Office|-1250.00
 2025-10-15|18:22:10|Dinner|Chipotle|-18.45
-2025-11-28|10:00:00|Black Friday Sale|BestBuy|-89.99
+2025-11-28|10:50:20|Black Friday Sale|BestBuy|-89.99
 2025-12-24|15:45:30|Holiday Gift|Target|-45.00
 2026-01-02|09:12:05|Gym Membership|Planet Fitness|-25.00
-2026-01-15|04:00:00|Pay Check|Amazon|640.25
+2026-01-15|05:40:06|Pay Check|Amazon|640.25
 2026-02-14|19:30:00|Valentine's Dinner|The Cheesecake Factory|-75.60
 2026-02-20|08:15:12|Gas Refill|Shell|-38.00
 2026-03-05|11:20:45|Groceries|Walmart|-112.30
-2026-03-15|04:00:00|Pay Check|Amazon|710.00
+2026-03-15|04:01:10|Pay Check|Amazon|710.00
 2026-03-26|05:34:33|Ipad|BestBuy|-599.99
 2026-04-10|14:05:22|New Sneakers|Nike Store|-110.00
 2026-04-20|16:40:11|Movie Tickets|AMC|-32.00
@@ -31,3 +31,4 @@ date|time|description|vendor|amount
 2026-04-29|10:07:05|Tax Refund|IRS|560.00
 2026-04-29|10:10:10|vet visit|benfield hospital|-45.00
 2026-04-30|10:43:39|lottery|VALottery|200.00
+2026-04-30|02:48:41|Matcha latte|Dunkin'|-4.29

@@ -40,7 +40,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("Date-> %-15s |Time-> %-15s |Description-> %-22s |Vendor-> %-22s |Amount-> %-15.2f",date ,time
+        return String.format("Date-> %-15s | Time-> %-15s | Description-> %-22s | Vendor-> %-22s | Amount-> %-15.2f",date ,time
                 ,description
                 , vendor, amount);
 
