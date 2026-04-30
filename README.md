@@ -34,7 +34,6 @@
 
 ### **Input Validation & Stability**
 * **Prompt Management:** Reads all input as a `String` first to clear the Scanner buffer and prevent "skipped" prompts (Scanner Ghosting).
- <br>
 * **Exception Handling:** Employs `try-catch` blocks during data conversion. If an invalid format is entered (e.g., text instead of a date), the program re-prompts the user instead of terminating.
 
 ---
@@ -85,7 +84,6 @@ date|time|description|vendor|amount
 2025-10-15|18:22:10|Dinner|Chipotle|-18.45
 2025-11-28|10:00:00|Black Friday Sale|BestBuy|-89.99
 ```
-</br>
 ---
 
 ### Technical Showcase
