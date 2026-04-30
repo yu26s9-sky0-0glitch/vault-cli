@@ -1,51 +1,60 @@
 # VaultCLI: Accounting Ledger Application
 
 ## Project Overview: VaultCLI
-VaultCLI is a Java application that records and tracks personal financial transactions through a
-command-line interface. It functions by reading from and writing to a local CSV file, which serves
-as a permanent data store. This architecture ensures that all entered deposits and payments remain
-available for review after the program is closed and restarted.
+VaultCLI is a Java application that records and tracks personal financial
+transactions through a command-line interface. It functions by reading
+from and writing to a local CSV file, which serves as a permanent data
+store. This architecture ensures that all entered deposits and payments
+remain available for review after the program is closed and restarted.
 
 ### The application is built around three core operational pillars:
 
 1. Data Integrity and Persistence
-   At the start of every session, the application parses the transactions.csv file into an ArrayList
-   of objects. This allows the program to perform calculations and searches in memory for speed while
-   maintaining a physical record on the hard drive. When a user logs a new entry, the system updates
-   the file and the memory list simultaneously. To maintain mathematical accuracy, the program automatically
-   manages transaction signs: it force-assigns positive values to deposits and negative values to payments,
+   At the start of every session, the application parses the transactions.csv
+   file into an ArrayList of objects. This allows the program to perform 
+   calculations and searches in memory for speed while maintaining a physical
+   record on the hard drive. When a user logs a new entry, the system updates
+   the file and the memory list simultaneously. To maintain mathematical
+   accuracy, the program automatically manages transaction signs: it
+   force-assigns positive values to deposits and negative values to payments,
    preventing user error in balance calculations.
 
 2. Search and Reporting Engine
-   The reporting module uses LocalDate and LocalTime objects to analyze the transaction history.
-   Users can generate fixed reports, such as "Month-to-Date" or "Previous Year," where the system
-   automatically calculates the date boundaries and filters the list accordingly. The engine is 
-   designed to handle "Live" data, meaning any transaction added during the current session is
-   immediately included in report results without requiring a reload. Beyond time-based reports,
-   the engine includes dedicated logic to filter the ledger by transaction type or entity:
-   * Type-Based Filtering: The system can isolate all entries to display only "Deposits"
-     (positive values) or "Payments" (negative values).
-   * Vendor Search: Users can query a specific vendor name to see every transaction
-     associated with that business.
-   * Custom Search: This feature allows for multi-criteria queries, combining dates,
-     descriptions, vendors, and amounts into a single filtered view.
+   The reporting module uses LocalDate and LocalTime objects to analyze the
+   transaction history. Users can generate fixed reports, such as
+   "Month-to-Date" or "Previous Year," where the system automatically
+   calculates the date boundaries and filters the list accordingly.
+   The engine is designed to handle "Live" data, meaning any transaction
+   added during the current session is immediately included in report
+   results without requiring a reload. Beyond time-based reports, the engine
+   includes dedicated logic to filter the ledger by transaction type or entity:
+   * Type-Based Filtering: The system can isolate all entries to display only
+     "Deposits" (positive values) or "Payments" (negative values).
+   * Vendor Search: Users can query a specific vendor name to see every
+     transaction associated with that business.
+   * Custom Search: This feature allows for multi-criteria queries, combining
+     dates, descriptions, vendors, and amounts into a single filtered view.
 
 3. The Gatekeeper Logic
-   The "Custom Search" feature uses a specific filtering pattern to handle multi-criteria requests.
-   Users are prompted for five optional variables: Start Date, End Date, Description, Vendor, and Amount.
-   The engine evaluates the transaction list through a series of conditional checks. If a search field is
-   left blank, the logic bypasses that specific check. If a field contains data, the transaction must match
-   that criteria to remain in the results. This approach allows users to perform highly specific queries
-   (e.g., "All payments to Amazon between January and March") or broad searches by filling in only one field.
+   The "Custom Search" feature uses a specific filtering pattern to handle
+   multi-criteria requests. Users are prompted for five optional variables:
+   Start Date, End Date, Description, Vendor, and Amount. The engine evaluates
+   the transaction list through a series of conditional checks. If a search field 
+   is left blank, the logic bypasses that specific check. If a field contains
+   data, the transaction must match that criteria to remain in the results.
+   This approach allows users to perform highly specific queries (e.g., "All
+   payments to Amazon between January and March") or broad searches by filling
+   in only one field.
 
 4. Input Validation and Stability
-   To prevent runtime crashes, the application uses a centralized input utility that handles data conversion
-   and error trapping. 
-   * Prompt Management: The system reads all input as a String first. This method clears the Scanner buffer
-     and prevents the program from skipping prompts.
-   * Exception Handling: When converting text into dates or numbers, the system uses try-catch blocks.
-     If a user enters an invalid format (like "Oct 12" instead of "2026-10-12"), the program catches
-     the error, explains the requirement, and re-prompts the user instead of terminating the process.
+   To prevent runtime crashes, the application uses a centralized input utility
+   that handles data conversion and error trapping. 
+   * Prompt Management: The system reads all input as a String first. This
+     method clears the Scanner buffer and prevents the program from skipping prompts.
+   * Exception Handling: When converting text into dates or numbers, the system
+     uses try-catch blocks. If a user enters an invalid format (like "Oct 12"
+     instead of "2026-10-12"), the program catches the error, explains the
+     requirement, and re-prompts the user instead of terminating the process.
 
 ## How to Run the Project
 
