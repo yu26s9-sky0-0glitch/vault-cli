@@ -1,7 +1,6 @@
 package com.pluralsight;
 import com.pluralsight.ui.Console;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Reports {
@@ -98,7 +97,7 @@ public class Reports {
         }
     }
     /**
-     * displays all transaction in specified
+     * displays all transaction with specified vendor
      */
     private static void searchByVendor() {
         String vendor = Console.promptForString("Enter the vendor: ");

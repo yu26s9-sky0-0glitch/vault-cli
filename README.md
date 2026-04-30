@@ -16,16 +16,17 @@
 
 ###  Core Operational Pillars
 
-| Pillar                             | Description |
-|:-----------------------------------| :--- |
-| **Data Integrity and Presistence** | Parses `transactions.csv` into an `ArrayList` at startup. Updates both the memory list and the physical file simultaneously for real-time accuracy.<br/> Automatically assigns positive signs to deposits and negative signs to payments to eliminate mathematical user error and maintain an accurate balance. |
-| **Search & Reporting Engine**      | Leverages `LocalDate` and `LocalTime` for time-based reporting (e.g., Month-to-Date). Supports "Live" data, including new entries in results immediately. |
-| **Input Validation & Stability**   | To prevent runtime crashes, the application uses a centralized input utility that handles data conversion and error trapping. |
+| Pillar                             | Description                                                                                                                                                                                                                                                                                                     |
+|:-----------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Data Integrity and Persistence** | Parses `transactions.csv` into an `ArrayList` at startup. Updates both the memory list and the physical file simultaneously for real-time accuracy.<br/> Automatically assigns positive signs to deposits and negative signs to payments to eliminate mathematical user error and maintain an accurate balance. |
+| **Search & Reporting Engine**      | Allows filtering on all fields in the CSV. Supports "Live" data, including new entries in results immediately.                                                                                                                                                                                                  |
+| **Input Validation & Stability**   | To prevent runtime crashes, the application uses a centralized input utility that handles data conversion and error trapping.                                                                                                                                                                                   |
 
 ---
 
 ###  Search & Reporting Features
 
+* **Date and Time-Based Filtering:** Leverages `LocalDate` and `LocalTime` for time-based reporting (e.g., Month-to-Date).
 * **Type-Based Filtering:** Isolate entries to display only **Deposits** or **Payments**.
 * **Vendor Search:** Query specific entities to see all associated business history.
 * **Custom Search:** Perform multi-criteria queries by combining dates, descriptions, vendors, and amounts into a single filtered view.
@@ -89,13 +90,11 @@ date|time|description|vendor|amount
 ### Technical Showcase
 
 * **Robust Data Management:**
-Chained Comparator Sorting; Originally, the application attempted to reverse
-the ledger by inserting new CSV rows at index 0 of the ArrayList. I realized
-this approach assumed the source file was already sorted. To ensure the 
-is always accurate regardless of the CSV's state, I implemented a
-programmatic sort using chained comparators.
-This method sorts by date, uses the time as a tie-breaker for same-day entries,
-and then reverses the entire collection to ensure the newest transactions appear first.
+To ensure the ledger is always accurate regardless of the CSV's state, I
+implemented a programmatic sort using chained comparators. This method
+sorts by date, uses the time as a tie-breaker for same-day entries,
+and then reverses the entire collection to ensure the newest transactions
+appear first.
 ```java
     public static ArrayList<Transaction> sortLedger(ArrayList<Transaction> ledgerLoader) {
 
