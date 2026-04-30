@@ -63,6 +63,7 @@ public class Console {
     }
     /**
      * Prompts the user for a string.
+     * reprompts if string is empty
      * @param prompt to display the user
      * @return the string the user selected.
      */
@@ -78,6 +79,15 @@ public class Console {
             }
             System.out.println("Error: Input cannot be empty!");
         }
+    }
+    /**
+     * Prompts the user for a string.
+     * @param prompt to display the user
+     * @return the string the user selected.
+     */
+    public static String promptForStringEmpty(String prompt) {
+            System.out.print(prompt);
+            return  scanner.nextLine().trim();
     }
 
     /**
