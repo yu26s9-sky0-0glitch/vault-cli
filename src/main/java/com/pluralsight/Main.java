@@ -44,25 +44,21 @@ public class Main {
      * calls writeToLedgerCsv with all variables defined
      */
     private static void addTransaction(String operation) {
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String formattedTime = time.format(fmt);
         if (operation.equalsIgnoreCase("Deposit")) {
             String description = Console.promptForString("Briefly describe the deposit purpose: ");
             String payer = Console.promptForString("Enter the business or person involved: ");
             double amount = Console.promptForDouble("Enter the total amount deposited(No $ sign): ");
-            LocalDate date = LocalDate.now();
-            LocalTime time = LocalTime.now();
-            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("hh:mm:ss");
-            String formattedTime = time.format(fmt);
             writeToLedgerCsv(date, LocalTime.parse(formattedTime), description, payer, Math.abs(amount));
         }
         else if (operation.equalsIgnoreCase("Payment")) {
             String description = Console.promptForString("Briefly describe the payment purpose: ");
             String payer = Console.promptForString("Enter the business or person involved: ");
             double amount = Console.promptForDouble("Enter the total amount paid(No $ sign): ");
-            LocalDate date = LocalDate.now();
-            LocalTime time = LocalTime.now();
-            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalTime formattedTime = LocalTime.parse(time.format(fmt));
-            writeToLedgerCsv(date,formattedTime,description, payer,Math.abs(amount) * -1);
+            writeToLedgerCsv(date,LocalTime.parse(formattedTime),description, payer,Math.abs(amount) * -1);
 
         }
     }
