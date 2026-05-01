@@ -100,11 +100,15 @@ public class Reports {
      * displays all transaction with specified vendor
      */
     private static void searchByVendor() {
+        boolean found = false;
         String vendor = Console.promptForString("Enter the vendor: ");
         for(Transaction t : Ledger.sortLedger(ledger)){
             if (vendor.equalsIgnoreCase(t.getVendor())){
                 System.out.println(t);
+                found =true;
             }
+        }if(!found){
+            System.out.println("No Match Found!");
         }
     }
 

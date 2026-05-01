@@ -76,17 +76,17 @@ public class Ledger {
 
     /**
      * sorts the arraylist based on date then time in a reversed order
-     * @param ledgerLoader the ledger arraylist loaded with Transaction objects
+     * @param ledger the ledger arraylist loaded with Transaction objects
      * @return sorted and reversed ledger
      */
-    public static ArrayList<Transaction> sortLedger(ArrayList<Transaction> ledgerLoader) {
+    public static ArrayList<Transaction> sortLedger(ArrayList<Transaction> ledger) {
 
-        ledgerLoader.sort(
+        ledger.sort(
                 Comparator.comparing(Transaction::getDate)
                         .thenComparing(Transaction::getTime)
                         .reversed()
         );
-        return ledgerLoader;
+        return ledger;
     }
 
     /**

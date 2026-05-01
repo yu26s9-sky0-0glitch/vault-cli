@@ -59,7 +59,6 @@ public class Main {
             String payer = Console.promptForString("Enter the business or person involved: ");
             double amount = Console.promptForDouble("Enter the total amount paid(No $ sign): ");
             writeToLedgerCsv(date,LocalTime.parse(formattedTime),description, payer,Math.abs(amount) * -1);
-
         }
     }
 
